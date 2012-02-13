@@ -14,10 +14,8 @@ class Hiera
 
         Backend.datasources(scope, order_override) do |source|
           Hiera.debug("Looking for data source #{source}")
-
-          yamlfile = Backend.datafile(:yaml, scope, source, "yaml") || next
-
-          data = YAML.load_file(yamlfile)
+          yamlfile = Backend.datastream(:yaml, scope, source, "yaml") || next
+          data = YAML.load(yamlfile)
 
           next if ! data
           next if data.empty?

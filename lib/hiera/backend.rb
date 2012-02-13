@@ -31,6 +31,16 @@ class Hiera
         return file
       end
 
+      # Outputs a datastream from a file, or e.g. a URL
+      def datastream(backend, scope, source, extension)
+        f = datafile(backend, scope, source, extension)
+        if f:
+          return File.read(f)
+        else
+          return f
+        end
+      end
+
       # Returns an appropriate empty answer dependant on resolution type
       def empty_answer(resolution_type)
         case resolution_type
